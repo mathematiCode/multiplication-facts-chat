@@ -8,8 +8,15 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Calculator, Brain, Target } from 'lucide-react';
 
 export default function MathChatbot() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } =
-    useChat();
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    error,
+    append,
+  } = useChat();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
@@ -74,9 +81,15 @@ export default function MathChatbot() {
                     I'll help you learn strategies to solve problems in your
                     head!
                   </p>
-                  <p className="text-sm mt-2 text-blue-600">
-                    Say "hi" or "start" to begin!
-                  </p>
+                  <button
+                    className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                    onClick={() =>
+                      append({ role: 'user', content: "Let's start!" })
+                    }
+                    disabled={isLoading}
+                  >
+                    Get Started
+                  </button>
                 </div>
               )}
 
