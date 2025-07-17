@@ -1,22 +1,19 @@
-'use client';
+"use client"
 
-import { useChat } from 'ai/react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Calculator, Brain, Target } from 'lucide-react';
+import { useChat } from "ai/react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Calculator, Brain, Target } from "lucide-react"
 
 export default function MathChatbot() {
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    error,
-    append,
-  } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    maxSteps: 3,
+    onError: (error) => {
+      console.error("Chat error:", error)
+    },
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
@@ -25,16 +22,12 @@ export default function MathChatbot() {
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Brain className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-800">
-              Multiplication Facts Tutor
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-800">Math Strategy Tutor</h1>
           </div>
-          <p className="text-gray-600">
-            Learn mental math strategies for addition and multiplication!
-          </p>
+          <p className="text-gray-600">Learn mental math strategies for addition and multiplication!</p>
         </div>
 
-        {/* Strategy Tips Card
+        {/* Strategy Tips Card */}
         <Card className="mb-6 bg-gradient-to-r from-blue-100 to-purple-100 border-blue-200">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-800">
@@ -45,8 +38,7 @@ export default function MathChatbot() {
           <CardContent className="text-sm text-blue-700">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <strong>Bridge to 10:</strong> For 7+6, think 7+3=10, then
-                10+3=13
+                <strong>Bridge to 10:</strong> For 7+6, think 7+3=10, then 10+3=13
               </div>
               <div>
                 <strong>Skip Counting:</strong> For 3×7, count by 7s: 7, 14, 21
@@ -55,12 +47,11 @@ export default function MathChatbot() {
                 <strong>Break Apart:</strong> For 8×6, think (8×5) + (8×1) = 48
               </div>
               <div>
-                <strong>Use Known Facts:</strong> If 5×7=35, then 6×7 = 35+7 =
-                42
+                <strong>Use Known Facts:</strong> If 5×7=35, then 6×7 = 35+7 = 42
               </div>
             </div>
           </CardContent>
-        </Card> */}
+        </Card>
 
         {/* Chat Interface */}
         <Card className="h-[600px] flex flex-col">
@@ -77,34 +68,21 @@ export default function MathChatbot() {
                 <div className="text-center text-gray-500 mt-8">
                   <Brain className="h-12 w-12 mx-auto mb-4 text-gray-400" />
                   <p className="text-lg mb-2">Ready to practice mental math?</p>
-                  <p className="text-sm">
-                    I'll help you learn strategies to solve problems in your
-                    head!
-                  </p>
-                  <button
-                    className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
-                    onClick={() =>
-                      append({ role: 'user', content: "Let's start!" })
-                    }
-                    disabled={isLoading}
-                  >
-                    Get Started
-                  </button>
+                  <p className="text-sm">I'll help you learn strategies to solve problems in your head!</p>
+                  <p className="text-sm mt-2 text-blue-600">Say "hi" or "start" to begin!</p>
                 </div>
               )}
 
-              {messages.map(message => (
+              {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`mb-4 flex ${
-                    message.role === 'user' ? 'justify-end' : 'justify-start'
-                  }`}
+                  className={`mb-4 flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
                     className={`max-w-[80%] p-3 rounded-lg ${
-                      message.role === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-none'
-                        : 'bg-gray-100 text-gray-800 rounded-bl-none border'
+                      message.role === "user"
+                        ? "bg-blue-600 text-white rounded-br-none"
+                        : "bg-gray-100 text-gray-800 rounded-bl-none border"
                     }`}
                   >
                     <div className="whitespace-pre-wrap">{message.content}</div>
@@ -130,9 +108,7 @@ export default function MathChatbot() {
                       <span className="text-red-600">⚠️</span>
                       <span>Error: {error.message}</span>
                     </div>
-                    <p className="text-sm mt-1">
-                      Please check your OpenAI API key configuration.
-                    </p>
+                    <p className="text-sm mt-1">Please check your OpenAI API key configuration.</p>
                   </div>
                 </div>
               )}
@@ -152,20 +128,17 @@ export default function MathChatbot() {
                 Send
               </Button>
             </form>
-            {/* <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-xs text-gray-500 mt-2 text-center">
               Take your time and explain how you solved each problem!
-            </p> */}
+            </p>
           </div>
         </Card>
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-gray-600">
-          <p>
-            Practice makes perfect! The more you use these strategies, the
-            faster you'll get.
-          </p>
+          <p>Practice makes perfect! The more you use these strategies, the faster you'll get.</p>
         </div>
       </div>
     </div>
-  );
+  )
 }

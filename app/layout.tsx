@@ -1,25 +1,20 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import React from 'react';
+import type { Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Multiplication Chat',
-  description:
-    'Learn multiplication fact strategies to promote fluency andretention.',
-};
+  title: 'v0 App',
+  description: 'Created with v0',
+  generator: 'v0.dev',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Favicon placeholder: replace href with your favicon file, e.g. /favicon.ico or /placeholder-logo.png */}
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-      </head>
       <body>{children}</body>
     </html>
-  );
+  )
 }
